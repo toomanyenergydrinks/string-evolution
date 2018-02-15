@@ -38,7 +38,7 @@ function fitness(str) {
 function mutate(str) {
 
   return str.split("").map(function(letter) {
-    if (Math.round(Math.random()*20) == 2) {
+    if (Math.round(Math.random()*10) == 2) {
       return String.fromCharCode(letter.charCodeAt(0)+Math.round(((Math.random()*2)-1)));
     } else {
       return letter;
@@ -66,25 +66,47 @@ function breed(str1, str2) {
 
 }
 
-function () {
-
+function update_page() {
+  
 }
+
 
 $(document).ready(function() {
 
-  const initial_generation_size = 100;
+  var counter = 0;
+  const initial_generation_size = 200;
   const generations = 1000;
-  const breeding_number = 10;
-  const allowed_survivors = 10;
+  const breeding_number = 20;
+  const allowed_survivors = 20;
+  const generation_skip = 10;
 
+  var generation_history = [];
   var g = create_generation(initial_generation_size);
   var new_g = [];
 
-  for(let x=0;x<generations;x++) {
+  var int_f = setInterval(function() {
+    $("#display").html("<div id='string_entry'>" + generation_history[counter] + "</div>");
+    counter++;
+    if (counter >= (generations/generation_skip)) {
+      clearInterval(int_f);
+    }
+  }, 100);
 
+  var running = 1;
+
+  var x = 0;
+
+  for(let x = 0;x<generations;x++) {
+  while(running == 1) {
+ 
     new_g = g.map(function(c) { return [c, fitness(c)]; }).sort((a,b) => a[1] - b[1]);
 
-    var top = new_g.map((c) => c[0]).slice(0,100);
+    var top = new_g.map((c) => c[0]).slice(0,allowed_survivors);
+
+    if (top[0][1] == 0) {
+      running = 0;
+    }
+
     var top_kids = []
 
     for(let y=0;y<breeding_number;y++) {
@@ -97,8 +119,13 @@ $(document).ready(function() {
 
     g = g.concat(create_generation(100)).concat(top_kids).concat(top).map((x) => mutate(x));
 
-    generation_history.concat(new_g[0]);
+    if (x % generation_skip == 0) {
+      generation_history = generation_history.concat(new_g[0][0]);
+    }
+
+    x = x + 1;
 
   }
+
 
 });

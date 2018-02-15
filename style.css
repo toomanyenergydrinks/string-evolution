@@ -1,0 +1,11 @@
+body {
+  background-color: #000;
+  color: #fff;
+  font-family: "Share Tech";
+}
+
+#display {
+  text-align: center;
+  margin: 50px;
+  font-size: 2em;
+}
