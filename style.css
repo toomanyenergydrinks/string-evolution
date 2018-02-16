@@ -7,7 +7,7 @@ body {
 #display {
   text-align: left;
   margin: 50px;
-  font-size: 1em;
+  font-size: 3em;
   height: 500px;
   overflow-y: auto;
 }
