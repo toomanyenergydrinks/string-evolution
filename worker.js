@@ -1,4 +1,4 @@
-const target_str = "hello, genetic world! this string was evolved!";
+const target_str = "i am a product of so-called random evolution";
 
 function random_string(len) {
 
