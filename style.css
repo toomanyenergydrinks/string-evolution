@@ -5,7 +5,14 @@ body {
 }
 
 #display {
-  text-align: center;
+  text-align: left;
   margin: 50px;
-  font-size: 2em;
+  font-size: 1em;
+  height: 500px;
+  overflow-y: auto;
+}
+
+#container {
+  height: 600px;
+  overflow: hidden;
 }
