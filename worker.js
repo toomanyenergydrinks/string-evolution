@@ -20,21 +20,19 @@ let running = 1;
 
 function random_string(len) {
 
-  z = new Array(len)
+  return new Array(len)
              .fill(0)
              .map((_) => ALPHABET.charAt(get_random_int(0,ALPHABET.length)))
              .join("")
 
-  return z;
   }
 
 function create_generation(size) {
 
-  g = new Array(size)
+  return new Array(size)
                .fill(0)
                .map((_) => random_string(Math.round(get_random_int(5,RANDOM_STR_MAX_LEN)) ))
 
-  return g
 }
  
 function fitness(str) {
